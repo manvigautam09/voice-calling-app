@@ -10,15 +10,16 @@
 import { defineComponent } from "vue";
 import AgoraRTC from "agora-rtc-sdk";
 
+const rtc: any = {
+  client: null,
+  localStream: null,
+  params: {},
+};
+
 export default defineComponent({
   name: "VoiceCall",
   methods: {
     startCall: async () => {
-      const rtc: any = {
-        client: null,
-        localStream: null,
-        params: {},
-      };
       rtc.client = AgoraRTC.createClient({ mode: "rtc", codec: "h264" });
       await rtc.client.init("ad65498ba2f5406aad676a1ed4d34230");
       await rtc.client.join(null, `my-room`, null, function(
